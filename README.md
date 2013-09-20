@@ -35,9 +35,4 @@ angular.module('myApp', ['mgcrea.bootstrap.affix'])
 
 ## Examples
 
-```html
-<div class="iphone" bs-affix data-offset-top="200" data-offset-bottom="300">
-  <div class="iphone-content">
-  </div>
-</div>
-```
+[example.html](blob/master/example.html)

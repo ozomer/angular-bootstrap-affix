@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns:ng="http://angularjs.org" lang="en" ng-app="sidebarApp">
+  <head>
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      
+      .example-sidebar {
+        width: 100%; /* limited by max-width */
+      }
+
+      .example-sidebar > div > .well {
+        margin-right: 12px;
+      }
+
+      .example-sidebar.affix {
+        top: 60px;
+      }
+      
+      .example-sidebar:not(.affix) {
+        position: absolute;
+      }
+
+      .example-sidebar.affix-top {
+        top: 0;
+      }
+
+      .example-sidebar.affix-bottom {
+        bottom: 0;
+      }
+
+      .example-sidebar-parent {
+        position: relative;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href>
+            Sidebar Example App
+          </a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href>Menu A</a></li>
+            <li><a href>Menu B</a></li>
+            <li><a href>Menu C</a></li>
+          </ul>  
+        </div>
+      </div>
+    </header>
+    <div class="container">
+      <h1 style="text-align: center">Sidebar App</h1>
+      <h4>Text before sidebar.</h4>
+      <h4>Text before sidebar.</h4>
+      <h4>Text before sidebar.</h4>
+      <h4>Text before sidebar.</h4>
+      <h4>Text before sidebar.</h4>
+    </div>
+
+    <div class="container" ng-controller="MainCtrl">
+      <div class="row example-sidebar-parent"> 
+        <!-- Notice the data-offset-top="-60" that fixes the body padding-top for the navigation bar -->
+        <div class="container example-sidebar" 
+             bs-affix 
+             data-offset-top="-60" 
+             data-offset-bottom="+0"
+             ng-class="(affix === 'middle')?'affix':('affix-' + affix)">
+          <div class="col-md-4 col-lg-3">
+            <div class="well well-sm">
+              <ul class="nav nav-pills nav-stacked">
+                <li><a href>This</a></li>
+                <li><a href>Sidebar</a></li>
+                <li><a href>Scrolls</a></li>
+                <li><a href>With</a></li>
+                <li><a href>You</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-offset-4 col-md-8 col-lg-offset-3 col-lg-9">
+          <ol>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+            <li>Text next to sidebar.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h4>Text after sidebar.</h4>
+      <h4>Text after sidebar.</h4>
+      <h4>Text after sidebar.</h4>
+      <h4>Text after sidebar.</h4>
+      <h4>Text after sidebar.</h4>
+      <h4>Text after sidebar.</h4>
+      <h4>Text after sidebar.</h4>
+      <h4>Text after sidebar.</h4>
+      <h4>Text after sidebar.</h4>
+      <h4>Text after sidebar.</h4>
+      <h4>Text after sidebar.</h4>
+      <h4>Text after sidebar.</h4>
+      <h4>Text after sidebar.</h4>
+      <h4>Text after sidebar.</h4>
+      <h4>Text after sidebar.</h4>
+      <h4>Text after sidebar.</h4>
+      <h4>Text after sidebar.</h4>
+      <h4>Text after sidebar.</h4>
+      <h4>Text after sidebar.</h4>
+      <h4>Text after sidebar.</h4>
+      <h4>Text after sidebar.</h4>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular.js"></script>
+    <script src="https://raw.github.com/mgcrea/angular-jquery/master/dist/angular-jquery.min.js"></script>
+    <!-- fix this according to your bower-components location -->
+    <script src="dist/angular-bootstrap-affix.min.js"></script>
+    <script type="text/javascript">
+      function MainCtrl($scope) {
+      // Sidebar needs to have a scope.
+      };
+      angular.module('sidebarApp', ['mgcrea.bootstrap.affix']);
+    </script>
+
+  </body>
+</html>
