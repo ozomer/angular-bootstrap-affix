@@ -35,4 +35,4 @@ angular.module('myApp', ['mgcrea.bootstrap.affix'])
 
 ## Examples
 
-[example.html](blob/master/example.html)
+[example.html]
