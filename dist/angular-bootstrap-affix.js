@@ -1,43 +1,53 @@
-/**
- * angular-bootstrap-affix
- * @version v0.2.1 - 2013-07-24
- * @link https://github.com/mgcrea/bootstrap-affix
- * @author Olivier Louvignes <olivier@mg-crea.com>
- * @license MIT License, http://www.opensource.org/licenses/MIT
- */
 'use strict';
 angular.module('mgcrea.bootstrap.affix', ['mgcrea.jquery']).directive('bsAffix', [
   '$window',
-  '$location',
-  '$routeParams',
-  'debounce',
+  '$timeout',
   'dimensions',
-  function ($window, $location, $routeParams, debounce, dimensions) {
-    var affixed;
+  function ($window, $timeout, dimensions) {
     var unpin = null;
     var checkPosition = function (scope, el, options) {
       var scrollTop = window.pageYOffset;
       var scrollHeight = document.body.scrollHeight;
       var position = dimensions.offset.call(el[0]);
       var height = dimensions.height.call(el[0]);
-      var offsetTop = options.offsetTop * 1;
-      var offsetBottom = options.offsetBottom * 1;
-      var reset = 'affix affix-top affix-bottom';
-      var affix;
-      if (unpin !== null && scrollTop + unpin <= position.top) {
-        affix = false;
-      } else if (offsetBottom && position.top + height >= scrollHeight - offsetBottom) {
-        affix = 'bottom';
-      } else if (offsetTop && scrollTop <= offsetTop) {
-        affix = 'top';
-      } else {
-        affix = false;
+      var parent = el;
+      for (var i = 0; i < (options.offsetParent || 1) * 1; i++) {
+        parent = parent.parent();
       }
-      if (affixed === affix)
-        return;
-      affixed = affix;
-      unpin = affix === 'bottom' ? position.top - scrollTop : null;
-      el.removeClass(reset).addClass('affix' + (affix ? '-' + affix : ''));
+      var parent_position = dimensions.offset.call(parent[0]);
+      var parent_height = dimensions.height.call(parent[0]);
+      var offsetTop;
+      if (/^[+-]/.test(options.offsetTop)) {
+        offsetTop = parent_position.top + options.offsetTop * 1;
+      } else {
+        offsetTop = options.offsetTop * 1;
+      }
+      var offsetBottom;
+      if (/^[+-]/.test(options.offsetBottom)) {
+        offsetBottom = scrollHeight - (parent_position.top + parent_height + options.offsetBottom * 1) + 1;
+      } else {
+        offsetBottom = options.offsetBottom * 1;
+      }
+      var scope = el.scope();
+      if (scope) {
+        scope.$apply(function (scope) {
+          if (unpin !== null && scrollTop + unpin <= position.top) {
+            scope.affix = 'middle';
+            unpin = null;
+          } else if (offsetBottom && position.top + height >= scrollHeight - offsetBottom) {
+            scope.affix = 'bottom';
+            if (unpin == null) {
+              unpin = position.top - scrollTop;
+            }
+          } else if (offsetTop && scrollTop <= offsetTop) {
+            scope.affix = 'top';
+            unpin = null;
+          } else {
+            scope.affix = 'middle';
+            unpin = null;
+          }
+        });
+      }
     };
     return {
       restrict: 'EAC',
@@ -46,7 +56,7 @@ angular.module('mgcrea.bootstrap.affix', ['mgcrea.jquery']).directive('bsAffix',
           checkPosition(scope, iElement, iAttrs);
         });
         angular.element($window).bind('click', function () {
-          setTimeout(function () {
+          $timeout(function () {
             checkPosition(scope, iElement, iAttrs);
           }, 1);
         });
